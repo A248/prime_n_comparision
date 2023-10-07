@@ -27,6 +27,7 @@ def main(cum:int,width:int):
     output = ""
     start = time.perf_counter_ns()
     def prime_callback(counter:int,prime_val:int,end_time:int):
+        nonlocal output
         if not counter%width:
             output += f"{counter},{prime_val},{end_time-start}\n"
     gen_primes(cum,prime_callback)

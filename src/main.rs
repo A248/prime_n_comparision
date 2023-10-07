@@ -32,14 +32,14 @@ fn main() {
     args.next().unwrap();
     let n = args.next().unwrap().parse::<u32>().unwrap();
     let buckets = args.next().unwrap().parse::<u32>().unwrap();
-    let mut output = String::new();
+    let mut output = Vec::<u8>::new();
     let start = Instant::now();
     gen_primes(
         n as u32,
         |counter: u32, prime_val: u32, end_time: Instant| {
             if counter % buckets == 0 || counter == n {
                 write!(
-                    &mut output,
+                    output,
                     "{},{},{}\n",
                     counter,
                     prime_val,
@@ -56,6 +56,6 @@ fn main() {
             .open("./benchmark_rust")
             .unwrap(),
     );
-    file_writer.write(output).unwrap();
+    file_writer.write(&output).unwrap();
     file_writer.flush().unwrap();
 }

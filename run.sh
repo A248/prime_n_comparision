@@ -4,7 +4,8 @@ NPrimes=${2:-1000}
 NSegs=${3:-5}
 
 run_rust(){
-    cargo run --release -- $NPrimes $NSegs
+    cargo build --release
+    target/release -- $NPrimes $NSegs
 }
 
 run_python(){
