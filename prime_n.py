@@ -24,13 +24,14 @@ def gen_primes(gen:int,callback:Callable[[int,int,int],None]):
 
 
 def main(cum:int,width:int):
+    output = ""
     start = time.perf_counter_ns()
+    def prime_callback(counter:int,prime_val:int,end_time:int):
+        if not counter%width:
+            output += f"{counter},{prime_val},{end_time-start}\n"
+    gen_primes(cum,prime_callback)
     with open("./benchmark_python","w") as file:
-        def prime_callback(counter:int,prime_val:int,end_time:int):
-            f_str = f"{counter},{prime_val},{end_time-start}\n"
-            if not counter%width:
-                file.write(f_str)
-        gen_primes(cum,prime_callback)
+        file.write(output)
         file.flush()
     
 
