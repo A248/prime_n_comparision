@@ -5,7 +5,7 @@ NSegs=${3:-5}
 
 run_rust(){
     cargo build --release
-    target/release -- $NPrimes $NSegs
+    target/release $NPrimes $NSegs
 }
 
 run_python(){
